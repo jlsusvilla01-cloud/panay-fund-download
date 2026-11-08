@@ -1,0 +1,65 @@
+name: Build and release Panay Fund
+
+on:
+  push:
+    branches: [main]
+    paths: ["desktop/**", ".github/workflows/release.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Make icons
+        run: |
+          pip install pillow
+          python desktop/build/make_icon.py
+
+      - name: Get the latest Panay Fund screens
+        shell: bash
+        run: |
+          node -e "
+            const fs=require('fs'); const src=fs.readFileSync('desktop/renderer/config.js','utf8');
+            const cfg=JSON.parse(src.match(/=\s*(\{[\s\S]*?\});/)[1]);
+            fetch(cfg.url+'/rest/v1/docs?path=eq.release/app&select=data',{headers:{apikey:cfg.anonKey,Authorization:'Bearer '+cfg.anonKey}})
+              .then(r=>r.json()).then(rows=>{ if(!rows[0]) throw new Error('no release/app'); fs.writeFileSync('index.html', rows[0].data.html); console.log('screens', rows[0].data.version); })
+              .catch(e=>{ console.error(e); process.exit(1); });
+          "
+
+      - name: Build installer
+        working-directory: desktop
+        run: |
+          npm install
+          npm run dist
+
+      - name: Read version
+        id: v
+        shell: bash
+        run: echo "version=$(node -p "require('./desktop/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.v.outputs.version }}
+          name: Panay Fund ${{ steps.v.outputs.version }}
+          make_latest: true
+          files: desktop/dist/Panay-Fund-Setup-${{ steps.v.outputs.version }}.exe
+          body: |
+            Panay Fund for Windows (64-bit).
+
+            **Install:** open the downloaded file. If Windows shows "Windows protected your PC", click **More info**, then **Run anyway**. The installer isn't digitally signed yet.
+
+            **Sign in:** use your Panay Fund email and password, or click **Create an account**. The owner approves new staff accounts before they can see any records.

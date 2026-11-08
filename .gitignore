@@ -1,0 +1,8 @@
+node_modules/
+dist/
+/index.html
+desktop/renderer/vendor/
+desktop/renderer/app-bundle.js
+desktop/renderer/icon.png
+desktop/build/icon.png
+desktop/build/icon.ico

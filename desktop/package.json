@@ -1,0 +1,53 @@
+{
+  "name": "panay-fund",
+  "productName": "Panay Fund",
+  "version": "1.8.0",
+  "description": "Panay Fund lending management system",
+  "author": "Panay Fund",
+  "main": "main.js",
+  "scripts": {
+    "prepare-app": "node scripts/prepare.js",
+    "start": "node scripts/prepare.js && electron .",
+    "dist": "node scripts/prepare.js && electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "ph.panayfund.app",
+    "productName": "Panay Fund",
+    "artifactName": "Panay-Fund-Setup-${version}.exe",
+    "files": [
+      "main.js",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Panay Fund",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "publish": null
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4",
+    "jspdf": "2.5.1",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlsusvilla01-cloud/panay-fund-download.git"
+  }
+}
