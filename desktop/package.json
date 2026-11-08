@@ -1,7 +1,7 @@
 {
   "name": "panay-fund",
   "productName": "Panay Fund",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Panay Fund lending management system",
   "author": "Panay Fund",
   "main": "main.js",
@@ -13,7 +13,7 @@
   "build": {
     "appId": "ph.panayfund.app",
     "productName": "Panay Fund",
-    "artifactName": "Panay-Fund-Setup-${version}.exe",
+    "artifactName": "Panay-Fund-Setup.exe",
     "files": [
       "main.js",
       "renderer/**/*",

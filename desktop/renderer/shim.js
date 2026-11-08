@@ -60,13 +60,21 @@
     const {data} = await sb.from("members").select("*").eq("user_id", session.user.id).maybeSingle();
     member = data || {role: "pending", email: session.user.email};
   }
-  sb.auth.onAuthStateChange(async (ev, s) => {
-    if (s && !session) { session = s; await loadMember(); $("#pf-auth").hidden = true; window.__pfAuthed(); }
-    else if (!s && session) { session = null; location.reload(); }
-    else if (s) session = s;
+  // never await other Supabase calls inside this callback: it holds the auth lock (that froze startup in 1.8.0)
+  sb.auth.onAuthStateChange((ev, s) => {
+    setTimeout(async () => {
+      if (s && !session) { session = s; try { await loadMember(); } catch (e) { member = {role: "pending", email: s.user.email}; } $("#pf-auth").hidden = true; window.__pfAuthed(); }
+      else if (!s && session) { session = null; location.reload(); }
+      else if (s) session = s;
+    }, 0);
   });
+  // if startup takes too long, offer a way out instead of a frozen screen
+  setTimeout(() => {
+    const boot = $("#pf-boot");
+    if (boot && !boot.hidden && !session) boot.innerHTML = `<div style="text-align:center;display:grid;gap:12px;justify-items:center"><div>Panay Fund is taking longer than usual to connect.</div><div style="display:flex;gap:8px"><button class="pa-btn" onclick="location.reload()">Try again</button><button class="pa-btn" style="background:#334155" onclick="try{localStorage.removeItem('panayfund-auth')}catch(e){};location.reload()">Sign in again</button></div><div style="font-size:12px;opacity:.7">Check your internet connection.</div></div>`;
+  }, 15000);
   sb.auth.getSession().then(({data}) => { if (!data.session) view("signin"); });
-  window.pfSignOut = async () => { await sb.auth.signOut(); location.reload(); };
+  window.pfSignOut = async () => { try { await Promise.race([sb.auth.signOut(), new Promise(r => setTimeout(r, 3000))]); } catch (e) {} try { localStorage.removeItem("panayfund-auth"); } catch (e) {} location.reload(); };
 
   /* ---------------- database (document store) ---------------- */
   const splitPath = p => { const parts = String(p).split("/"); return {coll: parts.slice(0, -1).join("/"), id: parts[parts.length - 1]}; };

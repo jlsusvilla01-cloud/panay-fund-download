@@ -4,7 +4,7 @@ The Panay Fund lending management app for Windows (64-bit).
 
 ## Download
 
-**[Download Panay Fund for Windows](https://github.com/jlsusvilla01-cloud/panay-fund-download/releases/latest/download/Panay-Fund-Setup-1.8.0.exe)** (about 85 MB)
+**[Download Panay Fund for Windows](https://github.com/jlsusvilla01-cloud/panay-fund-download/releases/latest/download/Panay-Fund-Setup.exe)** (about 85 MB)
 
 ## Install
 

@@ -56,7 +56,7 @@ jobs:
           tag_name: v${{ steps.v.outputs.version }}
           name: Panay Fund ${{ steps.v.outputs.version }}
           make_latest: true
-          files: desktop/dist/Panay-Fund-Setup-${{ steps.v.outputs.version }}.exe
+          files: desktop/dist/Panay-Fund-Setup.exe
           body: |
             Panay Fund for Windows (64-bit).
 
