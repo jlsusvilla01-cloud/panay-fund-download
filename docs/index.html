@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Panay Fund</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B1730">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Panay Fund">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{color-scheme:light;box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:14px "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;background:#EEF2F4;color:#0F1B2D}
+[hidden]{display:none!important}
+#pf-auth{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:radial-gradient(120% 140% at 0% 0%,#163057 0%,#0B1730 45%,#08261F 100%)}
+.pa-card{width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:#fff;border-radius:18px;padding:28px;box-shadow:0 24px 60px rgba(0,0,0,.35);display:grid;gap:14px}
+.pa-brand{display:flex;align-items:center;gap:12px}
+.pa-brand img{width:46px;height:46px;border-radius:12px}
+.pa-brand b{font:700 20px "Sora","Manrope",system-ui,sans-serif;letter-spacing:.04em;display:block}
+.pa-brand small{color:#0E9F6E;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.pa-card h1{margin:4px 0 0;font:700 19px "Sora","Manrope",system-ui,sans-serif}
+.pa-sub{margin:0;color:#5A6B7E;font-size:13px;line-height:1.5}
+.pa-f{display:grid;gap:5px}
+.pa-f label{font-size:12px;font-weight:700;color:#5A6B7E}
+.pa-f input{font:inherit;padding:11px 12px;border:1px solid #D9E1E6;border-radius:10px;background:#fff;color:#0F1B2D}
+.pa-f input:focus{outline:2px solid #0E9F6E;outline-offset:-1px;border-color:transparent}
+.pa-btn{font:inherit;font-weight:800;font-size:15px;padding:12px;border-radius:11px;border:0;background:#0E9F6E;color:#fff;cursor:pointer}
+.pa-btn:hover{background:#0B8A5F}
+.pa-btn[disabled]{opacity:.6;pointer-events:none}
+.pa-link{background:none;border:0;color:#0E9F6E;font:inherit;font-weight:700;cursor:pointer;padding:0}
+.pa-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px}
+.pa-msg{font-size:13px;border-radius:10px;padding:10px 12px;background:#F4F7F8;color:#5A6B7E;line-height:1.5}
+.pa-msg.bad{background:#FBE4E4;color:#C03535}
+.pa-msg.ok{background:#DCF2E8;color:#0E7A55}
+.pa-foot{text-align:center;font-size:11.5px;color:#93A7BC;margin-top:4px}
+#pa-body{display:grid;gap:12px}
+#pf-boot{position:fixed;inset:0;display:grid;place-items:center;background:#0B1730;color:#E6EEF3;font-size:14px;z-index:90}
+</style>
+</head>
+<body>
+<div id="pf-boot">Starting Panay Fund…</div>
+<div id="pf-auth" hidden>
+  <div class="pa-card">
+    <div class="pa-brand"><img src="icon.png" alt=""><div><b>PANAY FUND</b><small>Lending system</small></div></div>
+    <div id="pa-body"></div>
+  </div>
+</div>
+<script src="vendor/supabase.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="config.js"></script>
+<script>window.PF_APP_VERSION = "0.0.0"; window.PF_APP_HTML = '<div style="padding:40px;font-family:sans-serif">Can\'t load Panay Fund. Check your internet connection and refresh.</div>';</script>
+<script src="bootstrap.js"></script>
+</body>
+</html>
