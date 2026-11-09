@@ -1,7 +1,7 @@
 {
   "name": "panay-fund",
   "productName": "Panay Fund",
-  "version": "1.8.1",
+  "version": "1.8.3",
   "description": "Panay Fund lending management system",
   "author": "Panay Fund",
   "main": "main.js",

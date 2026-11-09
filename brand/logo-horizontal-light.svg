@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="480" viewBox="0 0 1000 300">
+  <rect width="1000" height="300" fill="#FFFFFF"/>
+  <g transform="translate(60 50)"><svg width="200" height="200" viewBox="0 0 200 200">  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#163057"/><stop offset="1" stop-color="#0B3A33"/></linearGradient></defs>
+  <rect width="200" height="200" rx="46" fill="url(#g)"/>
+  <path d="M66 154V48h44a32 32 0 0 1 0 64H66" fill="none" stroke="#34D399" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M48 70h104M48 92h104" stroke="#E6EEF3" stroke-width="9" stroke-linecap="round"/>
+</svg></g>
+  <text x="300" y="158" font-family="Sora, Manrope, Segoe UI, Arial, sans-serif" font-weight="700" font-size="92" letter-spacing="5" fill="#0F1B2D">PANAY FUND</text>
+  <text x="304" y="222" font-family="Manrope, Segoe UI, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="13" fill="#0E9F6E">LENDING SYSTEM</text>
+</svg>

@@ -1,10 +1,6 @@
-from PIL import Image, ImageDraw
-S=1024; im=Image.new('RGBA',(S,S),(0,0,0,0)); d=ImageDraw.Draw(im); G=(52,211,153,255)
-d.rounded_rectangle((0,0,S-1,S-1),radius=230,fill=(18,35,64,255))
-d.rounded_rectangle((260,250,700,610),radius=180,outline=G,width=86)
-d.rectangle((260,250,450,336),fill=G); d.rectangle((260,524,450,610),fill=G)
-d.rounded_rectangle((260,250,346,790),radius=43,fill=G)
-d.rounded_rectangle((260,830,764,890),radius=30,fill=(230,238,243,255))
-im.save('desktop/build/icon.png')
-im.resize((256,256),Image.LANCZOS).save('desktop/build/icon.ico',sizes=[(256,256),(128,128),(64,64),(48,48),(32,32),(16,16)])
-im.resize((128,128),Image.LANCZOS).save('desktop/renderer/icon.png')
+# Builds the app icons from the Panay Fund logo (peso monogram).
+from PIL import Image
+src = Image.open('desktop/build/icon-source.png').convert('RGBA')
+src.save('desktop/build/icon.png')
+src.resize((256, 256), Image.LANCZOS).save('desktop/build/icon.ico', sizes=[(256, 256), (128, 128), (64, 64), (48, 48), (32, 32), (16, 16)])
+src.resize((128, 128), Image.LANCZOS).save('desktop/renderer/icon.png')

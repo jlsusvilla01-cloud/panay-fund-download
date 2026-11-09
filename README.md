@@ -1,3 +1,5 @@
+<img src="brand/panay-fund-logo-light.png" alt="Panay Fund" width="420">
+
 # Panay Fund
 
 The Panay Fund lending management app for Windows (64-bit).
